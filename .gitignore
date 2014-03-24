@@ -1,1 +1,4 @@
 .DS_Store
+.vagrant*
+docker_ssh*
+vagrant_ansible_inventory_agency
