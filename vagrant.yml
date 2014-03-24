@@ -1,0 +1,36 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    HOME: /home/vagrant
+    source: ../code
+    universe:
+      # databases
+      - name: databases
+        ssh: 6022
+        expose:
+        - 3306
+        - 27017
+        ports:
+        - docker: 3306
+          vagrant: 6006
+        - docker: 27017
+          vagrant: 6017
+      # web servers
+      - name: agency
+        ssh: 6023
+        expose:
+        - 80
+        links:
+        - 'databases:db'
+      # load balancer
+      - name: stargate
+        ssh: 6024
+        ports:
+        - docker: 80
+          vagrant: 6000
+        links:
+        - 'agency:agency'
+  roles:
+  - epel-repo
+  - vagrant
