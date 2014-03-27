@@ -1,0 +1,8 @@
+---
+- hosts: databases
+  vars_files:
+  - app-dev.yml
+  roles:
+  - epel-repo
+  - mysql
+  - mongodb

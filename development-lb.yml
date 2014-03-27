@@ -1,0 +1,7 @@
+---
+- hosts: load-balancers
+  vars_files:
+  - app-dev.yml
+  roles:
+  - epel-repo
+  - haproxy

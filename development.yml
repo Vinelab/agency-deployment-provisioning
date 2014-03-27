@@ -1,0 +1,4 @@
+---
+- include: development-lb.yml
+- include: development-db.yml
+- include: development-web.yml

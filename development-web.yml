@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  vars_files:
+  - app-dev.yml
+  roles:
+  - epel-repo
+  - nginx
+  - php-fpm
+  - php-mongo
+  - composer
+  - redis
+  - dev-setup
+  - dev-deploy
