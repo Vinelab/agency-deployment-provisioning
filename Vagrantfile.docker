@@ -37,9 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder vconfig['vars']['source'], "/home/vagrant/agency"
     # cafthouse provisioning
     agency.vm.provision "ansible" do |ansible|
-      ansible.playbook = "vagrant.yml"
+      ansible.playbook = "vagrant.docker.yml"
       # skip building and running docker (better set after first installation)
-      ansible.skip_tags = ["docker-images", "docker-run"]
+      # ansible.skip_tags = ["docker-images", "docker-run"]
     end
   end
 
