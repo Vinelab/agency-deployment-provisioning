@@ -1,8 +1,11 @@
 ---
-- hosts: databases
+- hosts: all
+  vars:
+    cluster: database
   vars_files:
   - app-dev.yml
   roles:
   - epel-repo
   - mysql
   - mongodb
+  - vagrant
