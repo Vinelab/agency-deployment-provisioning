@@ -1,3 +1,27 @@
 [submodule "roles/epel-repo"]
 	path = roles/epel-repo
 	url = git@github.com:Vinelab/ansible-epel-repo
+[submodule "roles/mysql"]
+	path = roles/mysql
+	url = git@github.com:Vinelab/ansible-mysql
+[submodule "roles/mongodb"]
+	path = roles/mongodb
+	url = git@github.com:Vinelab/ansible-mongodb
+[submodule "roles/haproxy"]
+	path = roles/haproxy
+	url = git@github.com:Vinelab/ansible-haproxy
+[submodule "roles/nginx"]
+	path = roles/nginx
+	url = git@github.com:Vinelab/ansible-nginx-laravel
+[submodule "roles/php-fpm"]
+	path = roles/php-fpm
+	url = git@github.com:Vinelab/ansible-php-fpm
+[submodule "roles/php-mongo"]
+	path = roles/php-mongo
+	url = git@github.com:Vinelab/ansible-php-mongo
+[submodule "roles/composer"]
+	path = roles/composer
+	url = git@github.com:Vinelab/ansible-composer
+[submodule "roles/redis"]
+	path = roles/redis
+	url = git@github.com:Vinelab/ansible-redis
