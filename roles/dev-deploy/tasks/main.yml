@@ -4,6 +4,52 @@
   tags:
   - deploy
   - post-deploy
-  # notify:
-  # - db migrate
-  # - db seed
+
+- name: running database migrations
+  shell: echo db migrate
+  notify:
+      - db migrate
+  tags:
+      - db-migrate
+
+- name: seeding database
+  shell: echo db seed
+  notify:
+      - db seed
+  tags:
+      - db-seed
+
+- name: refreshing database
+  shell: echo db refresh
+  notify:
+      - db refresh
+  tags:
+      - db-refresh
+
+- name: composer install
+  shell: echo composer install
+  notify:
+      - composer install
+  tags:
+      - composer-install
+
+- name: composer update
+  shell: echo composer update
+  notify:
+      - composer update
+  tags:
+      - composer-update
+
+- name: composer dump
+  shell: echo composer dump
+  notify:
+      - composer dump
+  tags:
+      - composer-dump
+
+- name: artisan dump
+  shell: echo artisan dump
+  notify:
+      - artisan dump
+  tags:
+      - artisan-dump

@@ -1,9 +1,12 @@
 ---
+- name: composer install
+  shell: /usr/local/bin/composer install chdir={{app.sites[0]['path']}}
+
 - name: composer update
-  shell: composer update chdir={{app.sites[0]['path']}}
+  shell: /usr/local/bin/composer update chdir={{app.sites[0]['path']}}
 
 - name: composer dump
-  shell: composer dump-autoload chdir={{app.sites[0]['path']}}
+  shell: /usr/local/bin/composer dump-autoload chdir={{app.sites[0]['path']}}
 
 - name: artisan dump
   shell: php artisan dump-autoload chdir={{app.sites[0]['path']}}
