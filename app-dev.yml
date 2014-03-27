@@ -1,12 +1,12 @@
 app:
   name: agency
   env: development
-
+  source: ../code
   sites:
     - title: agency
       domains: "agency.dev www.agency.dev api.agency.dev cms.agency.dev"
-      path: /home/agency
-      public_path: /home/agency/public
+      path: /var/www/agency
+      public_path: /var/www/agency/public
 
   haproxy:
     default: agency
@@ -16,6 +16,8 @@ app:
         - hdr_dom(host) -i agency.dev cms.agency.dev cms.manage.agency.dev artists.agency.dev
       servers:
         - title: web1
+          address: 192.168.50.10:80
+        - title: web-docker
           address: 172.17.0.3:80
 
   redis:
