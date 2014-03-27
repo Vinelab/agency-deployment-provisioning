@@ -1,5 +1,7 @@
 ---
-- hosts: webservers
+- hosts: all
+  vars:
+    cluster: web
   vars_files:
   - app-dev.yml
   roles:
@@ -11,3 +13,4 @@
   - redis
   - dev-setup
   - dev-deploy
+  - vagrant
