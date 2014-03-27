@@ -1,0 +1,58 @@
+---
+- name: increase php allowed memory size to 512MB
+  ini_file: dest=/etc/php.ini
+            section=PHP
+            option=memory_limit
+            value=512M
+  tags: setup
+  notify:
+  - restart php-fpm
+
+- name: install php development packages
+  yum: name={{item}} state=present
+  with_items:
+  - php-devel
+  - php-pear
+  - gcc
+  - gcc-c++
+  - autoconf
+  - automake
+  tags: setup
+
+- name: set php timezone
+  ini_file: dest=/etc/php.ini
+            section=PHP
+            option=date.timezone
+            value=Asia/Beirut
+  tags: setup
+
+- name: determine php modules directory
+  shell: php -i | grep -i '^extension_dir' | awk '{print $3}'
+  register: php_extension_dir
+  tags: setup
+
+- name: install xdebug
+  shell: pecl install Xdebug creates="{{php_extension_dir.stdout_lines[0]}}/xdebug.so"
+  tags: setup
+  notify:
+  - restart php-fpm
+
+- name: add xdebug extension to php
+  ini_file: dest=/etc/php.ini
+            section=xdebug
+            option=zend_extension
+            value={{php_extension_dir.stdout_lines[0]}}/xdebug.so
+            state=present
+  tags: setup
+  notify:
+  - restart php-fpm
+
+- name: make xdebug available over remote
+  ini_file: dest=/etc/php.ini
+            section=xdebug
+            option=xdebug.remote_enable
+            value=1
+            state=present
+  tags: setup
+  notify:
+  - restart php-fpm
