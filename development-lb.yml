@@ -1,7 +1,10 @@
 ---
-- hosts: load-balancers
+- hosts: all
+  vars:
+    cluster: lb
   vars_files:
   - app-dev.yml
   roles:
   - epel-repo
   - haproxy
+  - vagrant
