@@ -1,0 +1,18 @@
+---
+- name: composer update
+  shell: composer update chdir={{app.sites[0]['path']}}
+
+- name: composer dump
+  shell: composer dump-autoload chdir={{app.sites[0]['path']}}
+
+- name: artisan dump
+  shell: php artisan dump-autoload chdir={{app.sites[0]['path']}}
+
+- name: db migrate
+  shell: php artisan migrate chdir={{app.sites[0]['path']}}
+
+- name: db refresh
+  shell: php artisan migrate:refresh chdir={{app.sites[0]['path']}}
+
+- name: db seed
+  shell: php artisan db:seed chdir={{app.sites[0]['path']}}

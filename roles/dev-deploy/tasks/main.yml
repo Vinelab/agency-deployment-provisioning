@@ -1,0 +1,9 @@
+---
+- name: post deployment and stuff =)
+  shell: echo Almost Done!
+  tags:
+  - deploy
+  - post-deploy
+  # notify:
+  # - db migrate
+  # - db seed
