@@ -13,9 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # define virtual machines
     config.vm.define 'web', primary: true do |web|
         web.vm.box = 'CentOS64'
+        web.vm.hostname = 'agency-develop'
         web.vm.network 'private_network', ip: '192.168.50.10', virtualbox__intnet: true
         web.vm.synced_folder vconfig['app']['source'], '/var/www/agency'
-        web.vm.hostname = 'agency-dev'
 
         web.vm.provision 'ansible' do |ansible|
             ansible.playbook = 'development-web.yml'
