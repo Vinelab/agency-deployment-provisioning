@@ -1,0 +1,8 @@
+[load-balancers]
+vg.vic.stargate
+
+[webservers]
+vg.vic
+
+[databases]
+vg.vic.db
