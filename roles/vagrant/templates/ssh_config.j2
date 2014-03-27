@@ -1,8 +1,0 @@
-{% for planet in universe %}
-Host {{planet.name}}
-     HostName localhost
-     User root
-     Port {{planet.ssh}}
-     IdentityFile /vagrant/docker_ssh
-
-{% endfor %}

@@ -1,6 +1,0 @@
-#!/bin/bash
-{% for planet in universe  %}
-    # Run {{planet.name}}
-    docker run -d -name {{planet.name}} {% if 'ssh' in planet %} -p {{planet.ssh}}:22 {% endif %} {% if 'ports' in planet %}{% for port in planet.ports %} -p {{port.vagrant}}:{{port.docker}} {% endfor %} {% endif %} {% if 'expose' in planet %} {% for port in planet.expose %}--expose={{port}} {% endfor %} {% endif %} {% if 'links' in planet %}{% for link in planet.links %} -link {{link}}{% endfor %}{% endif %} -v {{HOME}}/agency/{{planet.name}}:/home/{{planet.name}} {{planet.name}}
-
-{% endfor %}
