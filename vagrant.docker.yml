@@ -33,4 +33,4 @@
         - 'agency:agency'
   roles:
   - epel-repo
-  - vagrant
+  - vagrant-docker

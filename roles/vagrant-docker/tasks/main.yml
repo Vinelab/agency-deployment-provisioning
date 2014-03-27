@@ -1,0 +1,59 @@
+---
+- name: make terminal pretty with a better .bash_profile
+  template: src=bash_profile.j2 dest="/home/vagrant/.bash_profile"
+  tags:
+  - installation
+
+
+- name: install docker-io
+  yum: name=docker-io state=latest
+  tags:
+  - installation
+  - docker
+  - docker-install
+
+- name: run docker daemon
+  service: name=docker state=running
+  tags:
+  - installation
+  - docker
+  - docker-service
+
+
+- name: generate ssh key
+  shell: ssh-keygen -f docker_ssh -t rsa -N '' chdir=/vagrant creates=docker_ssh
+  sudo: non
+  tags:
+  - installation
+  - ssh
+  - ssh-key
+
+- name: configure ssh
+  template: src=ssh_config.j2 dest={{HOME}}/.ssh/config
+  tags:
+  - installation
+  - ssh
+  - ssh-config
+
+
+- name: build docker images
+  shell: docker build -t {{item.name}} /vagrant
+  with_items: universe
+  tags:
+  - installation
+  - docker
+  - docker-images
+
+- name: construct docker runner script
+  template: src=docker.run.j2 dest={{HOME}}/docker.run.sh
+  tags:
+  - installation
+  - docker
+  - docker-script
+
+- name: run docker containers
+  shell: sh docker.run.sh chdir={{HOME}}
+  tags:
+  - installation
+  - docker
+  - docker-run
