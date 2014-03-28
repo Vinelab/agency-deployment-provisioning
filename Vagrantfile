@@ -21,6 +21,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             ansible.playbook = 'development-web.yml'
             ansible.sudo = true
             # ansible.tags = ['deploy']
+            ansible.skip_tags = [
+                'db-migrate',
+                'db-seed',
+                'db-refresh',
+                'composer-install',
+                'composer-update',
+                'composer-dump',
+                'artisan-dump'
+            ]
         end
     end
 
