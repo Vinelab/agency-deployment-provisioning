@@ -13,9 +13,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # define virtual machines
     config.vm.define 'web', primary: true do |web|
         web.vm.box = 'CentOS64'
+
         web.vm.hostname = 'agency-develop'
         web.vm.network 'private_network', ip: '192.168.50.10', virtualbox__intnet: true
-        web.vm.synced_folder vconfig['app']['source'], '/var/www/agency'
+        web.vm.synced_folder vconfig['app']['source'], '/var/www/agency', :mount_options => ["dmode=777,fmode=777"]
 
         web.vm.provision 'ansible' do |ansible|
             ansible.playbook = 'development-web.yml'
@@ -48,6 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define 'db' do |db|
         db.vm.box = 'CentOS64'
 
+        db.vm.network :forwarded_port, guest: 3306, host: 7878
         db.vm.network 'private_network', ip: '192.168.50.20', virtualbox__intnet: true
 
         db.vm.provision 'ansible' do |ansible|
