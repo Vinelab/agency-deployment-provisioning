@@ -53,3 +53,9 @@
       - artisan dump
   tags:
       - artisan-dump
+- name: open up app/storage for the world
+  shell: echo changing permissions of app/storage
+  notify:
+      - open storage directory
+  tags:
+      - open-storage-directory

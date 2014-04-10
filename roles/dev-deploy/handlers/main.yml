@@ -19,3 +19,6 @@
 
 - name: db seed
   shell: php artisan db:seed chdir={{app.sites[0]['path']}}
+
+- name: open storage directory
+  shell: chmod -R o+w app/storage chdir={{app.sites[0]['path']}}
